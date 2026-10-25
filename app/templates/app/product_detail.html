@@ -1,0 +1,31 @@
+﻿{% extends "app/layout.html" %}
+{% load static %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+<div class="product-detail">
+    <div class="product-detail-image">
+        {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        {% endif %}
+    </div>
+    <div class="product-detail-info">
+        <h1>{{ product.name }}</h1>
+        <p class="category">Категория: <a href="{{ product.category.get_absolute_url }}">{{ product.category.name }}</a></p>
+        <p class="article">Артикул: {{ product.article }}</p>
+        {% if product.vin_code %}
+        <p class="vin">VIN-номер: <strong>{{ product.vin_code }}</strong></p>
+        {% endif %}
+        <p class="price">{{ product.price }} ₽</p>
+        {% if product.in_stock %}
+        <p class="in-stock">✅ В наличии</p>
+        {% else %}
+        <p class="out-of-stock">❌ Нет в наличии</p>
+        {% endif %}
+        <h3>Описание:</h3>
+        <p>{{ product.full_description|linebreaksbr }}</p>
+        <a href="{{ product.category.get_absolute_url }}" class="btn-submit">← Вернуться к товарам категории «{{ product.category.name }}»</a>
+    </div>
+</div>
+{% endblock %}

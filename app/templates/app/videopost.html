@@ -1,0 +1,32 @@
+{% extends "app/layout.html" %}
+{% load static %}
+{% block title %}Видео{% endblock %}
+
+{% block content %}
+<h2>Видео обзоры</h2>
+<p>Полезные видео о подборе автозапчастей и обслуживании автомобилей</p>
+
+<div style="display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; margin-top: 40px;">
+    <div style="flex: 1; min-width: 300px; text-align: center;">
+        <h3>Как подобрать запчасти по VIN</h3>
+        <video width="100%" controls poster="{% static 'app/content/poster1.jpg' %}" style="border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+            <source src="/media/video/video1.mp4" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+        </video>
+        <p style="margin-top: 10px;">Подробная инструкция по поиску деталей</p>
+    </div>
+
+    <div style="flex: 1; min-width: 300px; text-align: center;">
+        <h3>ТОП-5 популярных запчастей</h3>
+        <video width="100%" controls poster="{% static 'app/content/poster2.jpg' %}" style="border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+            <source src="/media/video/video2.mp4" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+        </video>
+        <p style="margin-top: 10px;">Обзор самых востребованных деталей</p>
+    </div>
+</div>
+
+<p style="margin-top: 40px; text-align: center;">
+    <a href="{% url 'home' %}" style="color: #e67e22;"> Вернуться на главную</a>
+</p>
+{% endblock %}

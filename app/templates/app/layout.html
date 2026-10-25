@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Автозапчасти 24/7 - {% block title %}{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'app/content/site.css' %}">
+    <style>
+        /* Дополнительные стили */
+        .feedback-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+            .form-group label {
+                display: block;
+                font-weight: 600;
+                margin-bottom: 0.5rem;
+                color: #1a2a3a;
+            }
+
+        input[type="text"], input[type="email"], select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .radio-group, .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .btn-submit, button[type="submit"] {
+            background: #e67e22;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+            .btn-submit:hover, button[type="submit"]:hover {
+                background: #d35400;
+            }
+
+        .errorlist {
+            color: #e74c3c;
+            font-size: 0.875rem;
+            list-style: none;
+            padding-left: 0;
+            margin-top: 0.25rem;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #28a745;
+        }
+
+        .comment-card {
+            background: #f8f9fa;
+            border-left: 3px solid #e67e22;
+            padding: 12px 15px;
+            margin: 15px 0;
+            border-radius: 6px;
+        }
+
+        .comment-meta {
+            color: #666;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+        }
+
+        .links-list {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .link-card {
+            background-color: #f8f9fa;
+            border-left: 5px solid #e67e22;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+            .link-card:hover {
+                transform: translateX(10px);
+                background-color: #fff;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Автозапчасти 24/7</h1>
+        <p>Ваш надежный партнер в мире автомобильных запчастей</p>
+    </header>
+
+    <nav>
+        <a href="{% url 'home' %}">Главная</a>
+        <a href="{% url 'links' %}">Полезные ссылки</a>
+        <a href="{% url 'pool' %}">Обратная связь</a>
+        <a href="{% url 'blog' %}">Блог</a>
+        <a href="{% url 'video' %}">Видео</a>
+        {% if user.is_authenticated %}
+        {% if user.is_superuser %}
+        <a href="{% url 'newpost' %}">+ Добавить статью</a>
+        {% endif %}
+        <span style="color: #e67e22; margin-left: 15px;">Привет, {{ user.username }}</span>
+        <a href="{% url 'logout' %}">Выйти</a>
+        {% else %}
+        <a href="{% url 'login' %}">Войти</a>
+        <a href="{% url 'registration' %}">Регистрация</a>
+        {% endif %}
+    </nav>
+
+    <main class="container">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>© 2025 Автозапчасти 24/7. Все права защищены.</p>
+    </footer>
+
+</body>
+</html>

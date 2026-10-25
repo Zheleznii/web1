@@ -1,0 +1,36 @@
+{% extends "app/layout.html" %}
+
+{% block title %}Добавить статью{% endblock %}
+ 
+{% block content %}
+<div class="feedback-container">
+    <h2>Добавить новую статью в блог</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="id_title">Заголовок статьи</label>
+            {{ form.title }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_description">Краткое содержание</label>
+            {{ form.description }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_content">Полное содержание</label>
+            {{ form.content }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_image">Изображение для статьи</label>
+            {{ form.image }}
+        </div>
+
+        <button type="submit" class="btn-submit">Опубликовать статью</button>
+        <a href="{% url 'blog' %}" style="margin-left: 15px; color: #666;">Отмена</a>
+    </form>
+</div>
+{% endblock %}

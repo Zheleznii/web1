@@ -1,0 +1,35 @@
+{% extends "app/layout.html" %}
+
+{% block title %}Полезные ссылки{% endblock %}
+ 
+{% block content %}
+<h2>Рекомендуемые веб-ресурсы</h2>
+<p>Здесь собраны ссылки на официальные каталоги, сервисные мануалы и проверенные поставщики, которые помогут вам в подборе автозапчастей и обслуживании автомобиля.</p>
+
+<div class="links-list">
+    <div class="link-card">
+        <a href="https://www.exist.ru" target="_blank" rel="noopener noreferrer">1. Exist.ru — Каталог автозапчастей</a>
+        <div class="comment">
+            Один из крупнейших онлайн-каталогов запчастей в России. Удобный поиск по VIN-коду, артикулу или марке автомобиля. Позволяет сравнить цены оригинальных деталей и качественных аналогов от разных поставщиков.
+        </div>
+    </div>
+
+    <div class="link-card">
+        <a href="https://www.drive2.ru" target="_blank" rel="noopener noreferrer">2. Drive2.ru — Сообщество автолюбителей</a>
+        <div class="comment">
+            Крупнейшее русскоязычное автомобильное сообщество. Здесь вы найдете реальные отзывы о запчастях, подробные бортовые журналы с фотоотчетами по ремонту, а также сможете задать вопрос опытным владельцам вашей модели авто.
+        </div>
+    </div>
+
+    <div class="link-card">
+        <a href="https://www.autodoc.ru" target="_blank" rel="noopener noreferrer">3. Autodoc.ru — Интернет-магазин автозапчастей</a>
+        <div class="comment">
+            Европейский маркетплейс с огромным ассортиментом. Отличается прозрачной системой подбора, наличием множества брендов (от эконом до премиум) и подробными техническими характеристиками каждой детали. Удобен для поиска редких позиций.
+        </div>
+    </div>
+</div>
+
+<p style="margin-top: 30px; text-align: center;">
+    <a href="{% url 'home' %}" style="background-color: #e67e22; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">← Вернуться на главную</a>
+</p>
+{% endblock %}

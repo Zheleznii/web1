@@ -1,0 +1,22 @@
+{% extends "app/layout.html" %}
+
+{% block title %}Блог{% endblock %} 
+
+{% block content %}
+<h2>{{ title }}</h2>
+<br />
+
+{% if posts %}
+    {% for post in posts %}
+<hr />
+<div>
+    <h3>{{ post.title }}</h3>
+    <p style="color: #666; font-size: 14px;">Дата публикации: {{ post.posted|date:"d.m.Y H:i" }}</p>
+    <p>{{ post.description }}</p>
+    <p><a href="{% url 'blogpost' parameter=post.id %}" style="color: #e67e22;">Читать далее →</a></p>
+</div>
+    {% endfor %}
+{% else %}
+<p>Пока нет статей в блоге.</p>
+{% endif %}
+{% endblock %}

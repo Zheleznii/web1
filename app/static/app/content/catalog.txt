@@ -1,0 +1,24 @@
+{% extends "app/layout.html" %}
+{% load static %}
+
+{% block title %}Каталог запчастей{% endblock %}
+
+{% block content %}
+<h1>Каталог автозапчастей</h1>
+<p>Выберите категорию:</p>
+
+<div class="categories-grid">
+    {% for category in categories %}
+    <div class="category-card">
+        {% if category.image %}
+        <img src="{{ category.image.url }}" alt="{{ category.name }}" style="width: 400px; height: 300px; object-fit: cover; border-radius: 8px; margin-bottom: 15px;">
+        {% endif %}
+        <h3>{{ category.name }}</h3>
+        <p>{{ category.description|truncatewords:15 }}</p>
+        <a href="{{ category.get_absolute_url }}" class="btn-submit">Смотреть товары →</a>
+    </div>
+    {% empty %}
+    <p>Категории пока не добавлены.</p>
+    {% endfor %}
+</div>
+{% endblock %}

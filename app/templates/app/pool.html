@@ -1,0 +1,38 @@
+{% extends "app/layout.html" %}
+{% load static %}
+
+{% block title %}Обратная связь{% endblock %}
+ 
+{% block content %}
+<div class="feedback-container">
+    <h1>Обратная связь</h1>
+    <p>Пожалуйста, поделитесь вашим мнением о нашем сайте. Ваши отзывы помогают нам стать лучше!</p>
+
+    {% if submitted %}
+    <div class="success-message">
+        <h2>Спасибо за ваш отзыв, {{ data.name }}!</h2>
+        <p>Мы ценим ваше мнение и обязательно учтем ваши пожелания.</p>
+    </div>
+    <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0;">
+        <h3>Ваши данные:</h3>
+        <div><strong>Имя:</strong> {{ data.name }}</div>
+        <div><strong>Email:</strong> {{ data.email }}</div>
+        <div><strong>Оценка сайта:</strong> {{ data.rating }}</div>
+        <div><strong>Частота посещений:</strong> {{ data.frequency }}</div>
+        {% if data.improvements %}
+        <div><strong>Что нужно улучшить:</strong> {{ data.improvements }}</div>
+        {% endif %}
+        {% if data.suggestions %}
+        <div><strong>Ваши пожелания:</strong> {{ data.suggestions }}</div>
+        {% endif %}
+    </div>
+    <a href="{% url 'home' %}" class="btn-submit" style="display: inline-block; text-decoration: none;">На главную</a>
+    {% else %}
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn-submit">Отправить отзыв</button>
+    </form>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "app/layout.html" %}
+
+{% block title %}{{ post_1.title }}{% endblock %}
+ 
+{% block content %}
+<h2>{{ post_1.title }}</h2>
+<p style="color: #666; font-size: 14px;">Дата публикации: {{ post_1.posted|date:"d.m.Y H:i" }}</p>
+
+{% if post_1.image and post_1.image.url %}
+<div style="text-align: center; margin: 20px 0;">
+    <img src="{{ post_1.image.url }}" alt="{{ post_1.title }}" style="max-width: 100%; max-height: 400px; border-radius: 10px;">
+</div>
+{% endif %}
+
+<div style="line-height: 1.8;">
+    {{ post_1.content|linebreaksbr }}
+</div>
+
+<hr />
+
+<h3>Комментарии ({{ comments.count }})</h3>
+
+{% for comment in comments %}
+<div class="comment-card">
+    <div class="comment-meta">
+        <strong>{{ comment.author.username }}</strong> | {{ comment.date|date:"d.m.Y H:i" }}
+    </div>
+    <p>{{ comment.text|linebreaksbr }}</p>
+</div>
+{% empty %}
+<p>Пока нет комментариев. Будьте первым!</p>
+{% endfor %}
+
+{% if user.is_authenticated %}
+<h3>Добавить комментарий</h3>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn-submit">Отправить комментарий</button>
+</form>
+{% else %}
+<p style="background: #f0f4f8; padding: 15px; border-radius: 8px;">
+    Для добавления комментария, пожалуйста, <a href="{% url 'login' %}">авторизуйтесь</a>.
+</p>
+{% endif %}
+
+<p style="margin-top: 30px;">
+    <a href="{% url 'blog' %}" style="color: #e67e22;"> Назад ко всем статьям</a>
+</p>
+{% endblock %}
